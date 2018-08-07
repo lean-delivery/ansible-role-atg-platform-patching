@@ -1,0 +1,65 @@
+---
+- name: "Fetch ATG patch artifact with {{ transport }} transport"
+  include_tasks: "{{ transport_driver }}"
+  with_first_found:
+    - "fetch/{{ transport }}.yml"
+    - "fetch/unknown-transport.yml"
+  loop_control:
+    loop_var: transport_driver
+
+- name: "Read dynamo_root"
+  stat:
+    path: "{{ dynamo_root }}"
+  register: atg_path
+
+- name: "Get ATG user"
+  set_fact:
+    atg_user: "{{ atg_path.stat.pw_name }}"
+    atg_group: "{{ atg_path.stat.gr_name }}"
+
+- name: "Install section"
+  block:
+    - name: "Install unzip"
+      package:
+        name: "unzip"
+        state: "present"
+
+    # Installing pexpect through easy_install to avoid installing pip
+    # Temporarily workaround with rescue section until bug will be resolved
+    # https://github.com/ansible/ansible/issues/23534
+    - name: "Install pexpect section"
+      block:
+        - name: "Install pexpect using ansible easy_install module"
+          easy_install:
+            name: "pexpect"
+            state: "present"
+      rescue:
+        - name: "Install pexpect using python easy_install"
+          command: "easy_install pexpect"
+
+    - name: "Extract patch"
+      unarchive:
+        src: "{{ atg_patch_artifact }}"
+        dest: "{{ dynamo_root }}/patch"
+        list_files: True
+      register: patch_dir
+
+    - name: "Update permissions on {{ dynamo_root }}/patch/{{ patch_dir.files[0] }}"
+      file:
+        path: "{{ dynamo_root }}/patch/{{ patch_dir.files[0] }}"
+        owner: "{{ atg_user }}"
+        group: "{{ atg_group }}"
+        state: "directory"
+        recurse: True
+        mode: "0755"
+
+    - name: "Run patch {{ patch.id }} installation"
+      become_user: "{{ atg_user }}"
+      expect:
+        chdir: "{{ dynamo_root }}/patch/{{ patch_dir.files[0] }}bin"
+        command: "./install.sh"
+        timeout: "500"
+        responses:
+          "Please enter Y or N:": "Y"
+
+  become: True

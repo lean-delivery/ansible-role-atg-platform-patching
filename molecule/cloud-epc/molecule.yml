@@ -1,0 +1,35 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: delegated
+lint:
+  name: yamllint
+  options:
+    config-file: molecule/yamllint.yml
+platforms:
+  - name: test-atg-platform-patching-epc
+    image: CentOS6_64-bit
+    shape: mini
+    region: EPAM-BY2
+    wait_timeout: 1800
+    groups:
+      - atg_platform_patch_epc_group
+provisioner:
+  name: ansible
+  config_options:
+    ssh_connection:
+      control_path: "/var/ans/%%h"
+  env:
+    ANSIBLE_LIBRARY:
+      /home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: cloud-epc
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

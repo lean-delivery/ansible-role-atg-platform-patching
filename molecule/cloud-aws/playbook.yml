@@ -1,0 +1,22 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: lean_delivery.java
+    - role: lean_delivery.jboss
+      transport: "web"
+      transport_web: "{{ lookup('env','STORAGE_AWS') }}/oracle-commerce-suite/app-servers/jboss-eap-6.1.0.zip"
+    - role: lean_delivery.atg-platform
+      transport: "web"
+      transport_web: "{{ lookup('env','STORAGE_AWS') }}/oracle-commerce-suite/commerce/ATG11.2/ATG11.2/V78217-01.zip"
+    - role: ansible-role-atg-platform-patching
+      transport: "web"
+      atg_patches:
+        - id: "11.2p2"
+          transport_web: "{{ lookup('env','STORAGE_AWS') }}/oracle-commerce-suite/commerce/ATG11.2/ATG11.2_patch/p24950065_112000_Generic.zip"
+        - id: "11.2p2.1"
+          transport_web: "{{ lookup('env','STORAGE_AWS') }}/oracle-commerce-suite/commerce/ATG11.2/ATG11.2_patch/p25404313_112020_Generic.zip"
+
+  vars:
+    atg_version: "11.2"
+    dynamo_root: "/opt/atg/ATG{{ atg_version }}"

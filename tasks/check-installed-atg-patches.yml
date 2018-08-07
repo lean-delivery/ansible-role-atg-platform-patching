@@ -1,0 +1,31 @@
+---
+- name: "Check {{ config_properties_xml }} exists"
+  stat:
+    path: "{{ config_properties_xml }}"
+  register: config_xml
+
+- name: "Read file section"
+  block:
+    - name: "Get content of the file"
+      slurp:
+        src: "{{ config_properties_xml }}"
+      register: get_config_xml
+
+    - name: "Read config"
+      set_fact:
+        config_content: "{{ get_config_xml['content'] | b64decode }}"
+
+    - name: "Set regex string"
+      set_fact:
+        regex_value: "<patchLevel>{{ patch.id }}<\\/patchLevel>"
+
+    - name: "Check if patch installed"
+      set_fact:
+        patch_installed: True
+      when: "config_content | regex_search(regex_value)"
+
+  when: config_xml.stat.exists == True
+
+- name: "Run ATG patch {{ patch.id }} installation"
+  include_tasks: "install-atg-patch.yml"
+  when: patch_installed is not defined

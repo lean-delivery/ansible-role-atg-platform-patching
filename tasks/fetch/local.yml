@@ -1,0 +1,4 @@
+---
+- name: "Artifact stored localy"
+  set_fact:
+    atg_patch_artifact: "{{ patch.transport_local }}"
