@@ -52,7 +52,7 @@ Set  patches ID as they are defined in official Oracle Documentation
 
 
   - `download_path` - local folder for downloading artifacts  
-    default: `/tmp/`
+    default: `/tmp`
 
   - `dynamo_root` - path to installed ATG Platform  
     default: `/opt/atg/ATG`
@@ -63,7 +63,7 @@ Example Playbook
 
 ### Installing ATG patches for 11.2 from local:
 ```yaml
-- name: "Install ATG patches for 11.2 from lccal"
+- name: "Install ATG 11.2p2 patch and 1.2p2.1 fix pack from local"
   hosts: all
 
   roles:
@@ -76,10 +76,9 @@ Example Playbook
       transport: "local"
       transport_local: "/tmp/jboss-eap-6.1.0.zip"
     - role: lean_delivery.atg-platform
-      atg_version: "11.2"
       transport: "local"
       transport_local: "/tmp/V78217-01.zip"
-    - role: ansible-role-atg-platform-patching
+    - role: lean_delivery.atg-platform-patching
       transport: "local"
       atg_patches:
         - id: "11.2p2"
