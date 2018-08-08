@@ -63,7 +63,7 @@ Example Playbook
 
 ### Installing ATG patches for 11.2 from local:
 ```yaml
-- name: "Install ATG 11.2p2 patch and 1.2p2.1 fix pack from local"
+- name: "Install 11.2p2 patch and 1.2p2.1 fix pack for ATG 11.2 from local"
   hosts: all
 
   roles:
