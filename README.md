@@ -97,5 +97,4 @@ Apache2
 
 ## Authors
 
-  - Anastacia Maletskaya  
-    <anastacia_maletskaya@lean-delivery.com>
+team@lean-delivery.com
