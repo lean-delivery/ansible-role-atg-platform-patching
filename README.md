@@ -97,4 +97,5 @@ Apache2
 
 ## Authors
 
-team@lean-delivery.com
+  - Lean Delivery team  
+    <team@lean-delivery.com>
