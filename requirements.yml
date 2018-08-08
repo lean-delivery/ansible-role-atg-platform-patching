@@ -1,9 +1,9 @@
 ---
 - src: "lean_delivery.java"
-  version: v1.1
+  version: v1.2
 
 - src: "lean_delivery.jboss"
-  version: v0.1
+  version: v1.1
 
 - src: "lean_delivery.atg-platform"
-  version: v0.1
+  version: v1.0
