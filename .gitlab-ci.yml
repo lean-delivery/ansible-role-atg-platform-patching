@@ -15,7 +15,7 @@ variables:
   ANSIBLE_LIBRARY: "/home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible"
   ANSIBLE_INVENTORY_PLUGINS: "/home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible/inventory/epc.py"
 
-# Tests for EPC driver for ATG 11.2p2
+# Tests for EPC driver for ATG 11.2p2 patch
 EPC atg-platform-patching 11.2p2:
   variables:
     EPC_REGION: EPAM-BY2
@@ -25,7 +25,7 @@ EPC atg-platform-patching 11.2p2:
   tags:
     - delegated
 
-# Tests for AWS driver for ATG 11.2p2
+# Tests for AWS driver for ATG 11.2p2 patch
 AWS atg-platform-patching 11.2p2:
   variables:
     EPC_REGION: AWS-EUCENTRAL
@@ -35,7 +35,7 @@ AWS atg-platform-patching 11.2p2:
   tags:
     - delegated
 
-# Tests for Docker driver for ATG 11.2p2
+# Tests for Docker driver for ATG 11.2p2 patch
 Docker atg-platform-patching 11.2p2:
   stage: Deployment test
   script:
@@ -43,7 +43,7 @@ Docker atg-platform-patching 11.2p2:
   tags:
     - docker
 
-# Tests for Docker driver for ATG 10.2p5
+# Tests for Docker driver for ATG 10.2p5 patch
 Docker atg-platform-patching 10.2p5:
   stage: Deployment test
   script:
