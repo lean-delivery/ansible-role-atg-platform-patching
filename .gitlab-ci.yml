@@ -41,7 +41,7 @@ Docker atg-platform-patching 11.2p2:
   script:
     - molecule test -s docker-11.2p2
   tags:
-    - docker    
+    - docker
 
 # Tests for Docker driver for ATG 10.2p5
 Docker atg-platform-patching 10.2p5:
