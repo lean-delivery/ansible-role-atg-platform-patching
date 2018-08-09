@@ -16,7 +16,7 @@ variables:
   ANSIBLE_INVENTORY_PLUGINS: "/home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible/inventory/epc.py"
 
 # Tests for EPC driver for ATG 11.2p2
-EPC atg-platform-patching 11.2p2:
+.EPC atg-platform-patching 11.2p2:
   variables:
     EPC_REGION: EPAM-BY2
   stage: Deployment test
@@ -36,7 +36,7 @@ EPC atg-platform-patching 11.2p2:
     - delegated
 
 # Tests for Docker driver for ATG 11.2p2
-.Docker atg-platform-patching 11.2p2:
+Docker atg-platform-patching 11.2p2:
   stage: Deployment test
   script:
     - molecule test -s docker-11.2p2
@@ -44,7 +44,7 @@ EPC atg-platform-patching 11.2p2:
     - docker
 
 # Tests for Docker driver for ATG 10.2p5
-.Docker atg-platform-patching 10.2p5:
+Docker atg-platform-patching 10.2p5:
   stage: Deployment test
   script:
     - molecule test -s docker-10.2p5
