@@ -1,4 +1,4 @@
-atg-platform-patching
+atg_platform_patching
 =========
 [![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/ansible-role-atg-platform-patching/master/LICENSE)
 [![Build Status](https://travis-ci.org/lean-delivery/ansible-role-atg-platform-patching.svg?branch=master)](https://travis-ci.org/lean-delivery/ansible-role-atg-platform-patching)
@@ -22,7 +22,12 @@ Requirements
 For more information regarding support matrix please visit <https://support.oracle.com>
 
 ATG platform should be installed preliminarily:
-  - lean_delivery.atg-platform
+  - lean_delivery.atg_platform
+
+
+Check if installed next packages on target system:
+  - sudo
+  - easy_install
 
 
 ```
@@ -78,7 +83,7 @@ Example Playbook
     - role: lean_delivery.atg_platform
       transport: "local"
       transport_local: "/tmp/V78217-01.zip"
-    - role: lean_delivery.atg-platform-patching
+    - role: lean_delivery.atg_platform_patching
       transport: "local"
       atg_patches:
         - id: "11.2p2"
