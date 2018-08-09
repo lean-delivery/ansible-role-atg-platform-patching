@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: "atg-platform-patching"
+  role_name: "atg_platform_patching"
   author: "Lean Delivery team <team@lean-delivery.com>"
   description: "Lean Delivery ATG Platform Patches/Fix Packs install"
   company: "Epam Systems"

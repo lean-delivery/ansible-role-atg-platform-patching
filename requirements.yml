@@ -5,5 +5,5 @@
 - src: "lean_delivery.jboss"
   version: v1.1
 
-- src: "lean_delivery.atg-platform"
+- src: "lean_delivery.atg_platform"
   version: v1.0

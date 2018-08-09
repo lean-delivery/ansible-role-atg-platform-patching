@@ -75,7 +75,7 @@ Example Playbook
     - role: lean_delivery.jboss
       transport: "local"
       transport_local: "/tmp/jboss-eap-6.1.0.zip"
-    - role: lean_delivery.atg-platform
+    - role: lean_delivery.atg_platform
       transport: "local"
       transport_local: "/tmp/V78217-01.zip"
     - role: lean_delivery.atg-platform-patching

@@ -6,7 +6,7 @@
     - role: lean_delivery.jboss
       transport: "web"
       transport_web: "{{ lookup('env','STORAGE_EPC') }}/oracle-commerce-suite/app-servers/jboss-eap-6.1.0.zip"
-    - role: lean_delivery.atg-platform
+    - role: lean_delivery.atg_platform
       transport: "web"
       transport_web: "{{ lookup('env','STORAGE_EPC') }}/oracle-commerce-suite/commerce/ATG10.2/ATG10.2/ATG10.2.zip"
     - role: ansible-role-atg-platform-patching
