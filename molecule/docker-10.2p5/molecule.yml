@@ -10,13 +10,19 @@ lint:
   options:
     config-file: molecule/yamllint.yml
 platforms:
-  - name: test-atg-platform-patchings-10.2p5
+  - name: test-atg-platform-patching-10.2p5
     image: centos:6
     privileged: True
     groups:
-      - atg-platform
+      - atg-platform-patching-10.2p5
 provisioner:
   name: ansible
+  config_options:
+    ssh_connection:
+      control_path: "/var/ans/%%h"
+  env:
+    ANSIBLE_LIBRARY:
+      /home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible
   lint:
     name: ansible-lint
 scenario:
