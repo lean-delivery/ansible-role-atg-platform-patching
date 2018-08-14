@@ -1,0 +1,6 @@
+---
+- name: "Check if patch installed"
+  include_tasks: "check-installed-atg-patches.yml"
+  with_items: "{{ atg_patches }}"
+  loop_control:
+    loop_var: patch

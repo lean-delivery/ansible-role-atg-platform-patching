@@ -1,0 +1,52 @@
+---
+# Run all tests
+stages:
+  - lint
+  - Deployment test
+
+# Check ansible and molecule version
+before_script:
+  - ansible --version
+  - molecule --version
+
+variables:
+  GET_SOURCES_ATTEMPTS: "5"
+  ANSIBLE_INVENTORY: "/home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible/inventory/epc.py"
+  ANSIBLE_LIBRARY: "/home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible"
+  ANSIBLE_INVENTORY_PLUGINS: "/home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible/inventory/epc.py"
+
+# Tests for EPC driver for ATG 11.2p2 patch
+EPC atg-platform-patching 11.2p2:
+  variables:
+    EPC_REGION: EPAM-BY2
+  stage: Deployment test
+  script:
+    - molecule test -s cloud-epc
+  tags:
+    - delegated
+
+# Tests for AWS driver for ATG 11.2p2 patch
+AWS atg-platform-patching 11.2p2:
+  variables:
+    EPC_REGION: AWS-EUCENTRAL
+  stage: Deployment test
+  script:
+    - molecule test -s cloud-aws
+  tags:
+    - delegated
+
+# Tests for Docker driver for ATG 11.2p2 patch
+Docker atg-platform-patching 11.2p2:
+  stage: Deployment test
+  script:
+    - molecule test -s docker-11.2p2
+  tags:
+    - docker
+
+# Tests for Docker driver for ATG 10.2p5 patch
+Docker atg-platform-patching 10.2p5:
+  stage: Deployment test
+  script:
+    - molecule test -s docker-10.2p5
+  tags:
+    - docker

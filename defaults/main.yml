@@ -1,0 +1,20 @@
+---
+# path to installed Oracle ATG platform
+dynamo_root: "/opt/atg/ATG"
+
+# artifact source transport
+transport: "local "
+# available are:
+# - "web" Fetching artifact from custom web uri
+# - "local" Local artifact
+
+atg_patches:
+  - id: "11.2p2"
+    transport_web: "http://my-storage.example.com/p24950065_112000_Generic.zip"
+    transport_local: "/tmp/p24950065_112000_Generic.zip"
+  - id: "11.2p2.1"
+    transport_web: "http://my-storage.example.com/p25404313_112020_Generic.zip"
+    transport_local: "/tmp/p25404313_112020_Generic.zip"
+
+# path to download ATG patches
+download_path: "/tmp"

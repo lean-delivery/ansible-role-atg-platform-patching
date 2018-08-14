@@ -1,0 +1,3 @@
+---
+# ATG config.xml with list of all installed ATG components
+config_properties_xml: "{{ dynamo_root }}/home/installconfig/config.xml"
